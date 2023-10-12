@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciamento de Reembolsos</title>
+    <style>
+        button { margin: 10px; }
+        .hidden { display: none; }
+        .input-field { margin-bottom: 20px; display: block; }
+        #descricao { width: 400px; }
+    </style>
+</head>
+<body>
+
+<!-- Primeira tela: Seleção de Usuário -->
+<div id="selecaoUsuario">
+    <button onclick="mostrarTela('funcionario')">Funcionário</button>
+    <button onclick="mostrarTela('gerente')">Gerente</button>
+</div>
+
+<!-- Segunda tela: Funcionário -->
+<div id="telaFuncionario" class="hidden">
+    <h2>Funcionário</h2>
+    <form action="/reembolso" method="post">
+        <label class="input-field">Descrição:<br><textarea name="descricao" id="descricao" rows="4"></textarea></label>
+        <label class="input-field">Data:<br><input type="date" name="data" id="data"></label>
+        <label class="input-field">Valor:<br><input type="number" name="valor" id="valor"></label>
+        <button type="submit">Enviar</button>
+    </form>
+</div>
+
+
+<!-- Terceira tela: Gerente -->
+<div id="telaGerente" class="hidden">
+    <button onclick="voltarParaInicio()">Voltar</button>
+    <h2>Gerente</h2>
+    <button onclick="voltarParaInicio()">Voltar</button>
+    <div id="listaReembolsos">
+        <!-- A lista de reembolsos será preenchida aqui -->
+    </div>
+</div>
+
+<script>
+    function mostrarTela(tela) {
+        document.getElementById('selecaoUsuario').style.display = 'none';
+        document.getElementById('telaFuncionario').style.display = 'none';
+        document.getElementById('telaGerente').style.display = 'none';
+
+        if (tela === 'funcionario') {
+            document.getElementById('telaFuncionario').style.display = 'block';
+        } else if (tela === 'gerente') {
+            document.getElementById('telaGerente').style.display = 'block';
+            // Aqui você pode adicionar uma chamada AJAX para preencher a lista de reembolsos
+        }
+    }
+
+    function enviarReembolso() {
+        // Aqui você pode adicionar a lógica para enviar os dados do reembolso ao backend
+    }
+    function voltarParaInicio() {
+    document.getElementById('selecaoUsuario').style.display = 'block';
+    document.getElementById('telaFuncionario').style.display = 'none';
+    document.getElementById('telaGerente').style.display = 'none';
+}
+
+</script>
+
+</body>
+</html>
