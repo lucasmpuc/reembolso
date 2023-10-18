@@ -21,8 +21,9 @@
 
 <!-- Segunda tela: Funcionário -->
 <div id="telaFuncionario" class="hidden">
+    <button onclick="voltarParaInicio()">Voltar</button>
     <h2>Funcionário</h2>
-    <form action="/reembolso" method="post">
+    <form action="/reembolso" method="post" onsubmit="enviarReembolso(); return false;">
         <label class="input-field">Descrição:<br><textarea name="descricao" id="descricao" rows="4"></textarea></label>
         <label class="input-field">Data:<br><input type="date" name="data" id="data"></label>
         <label class="input-field">Valor:<br><input type="number" name="valor" id="valor"></label>
@@ -35,7 +36,7 @@
 <div id="telaGerente" class="hidden">
     <button onclick="voltarParaInicio()">Voltar</button>
     <h2>Gerente</h2>
-    <button onclick="voltarParaInicio()">Voltar</button>
+
     <div id="listaReembolsos">
         <!-- A lista de reembolsos será preenchida aqui -->
     </div>
@@ -55,13 +56,36 @@
         }
     }
 
-    function enviarReembolso() {
-        // Aqui você pode adicionar a lógica para enviar os dados do reembolso ao backend
-    }
-    function voltarParaInicio() {
-    document.getElementById('selecaoUsuario').style.display = 'block';
-    document.getElementById('telaFuncionario').style.display = 'none';
-    document.getElementById('telaGerente').style.display = 'none';
+   function enviarReembolso() {
+    const descricao = document.getElementById('descricao').value;
+    const data = document.getElementById('data').value;
+    const valor = document.getElementById('valor').value;
+
+    // Create a JavaScript object with the form data
+    const formData = {
+        descricao: descricao,
+        data: data,
+        valor: valor
+    };
+
+    // Make an HTTP POST request to your server to save the data as JSON
+    fetch('/reembolso', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+    })
+    .then(response => {
+        if (response.status === 200) {
+            alert('Reembolso saved successfully!');
+        } else {
+            alert('Error saving reembolso.');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
 }
 
 </script>

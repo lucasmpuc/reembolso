@@ -1,6 +1,11 @@
 package com.sistema.reembolso;
 
 public class Reembolso {
+    private String data;
+    private Long id;
+    private String descricao;
+    private Double valor;
+    private String status;
     public Reembolso(Long id, String descricao, Double valor, String data, String status) {
         this.id = id;
         this.descricao = descricao;
@@ -51,9 +56,5 @@ public class Reembolso {
         this.data = data;
     }
 
-    private String data;
-    private Long id;
-    private String descricao;
-    private Double valor;
-    private String status;
+
 }

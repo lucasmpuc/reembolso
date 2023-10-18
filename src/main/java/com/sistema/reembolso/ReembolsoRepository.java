@@ -2,15 +2,19 @@ package com.sistema.reembolso;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
+@Component
 public class ReembolsoRepository {
+    private final JdbcTemplate jdbcTemplate;
 
     @Autowired
-    private JdbcTemplate jdbcTemplate;
+    public ReembolsoRepository(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
 
     public Reembolso save(Reembolso reembolso) {
         String sql = "INSERT INTO reembolso (descricao, data, valor, status) VALUES (?, ?, ?, ?)";

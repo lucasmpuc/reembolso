@@ -7,30 +7,23 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 
 @RestController
+@RequestMapping("/reembolso")
 public class Controller {
-    @GetMapping("/ola")
-    public String dizerOla() {
-        return "Olá, Mundo!";
-    }
 
-    @RequestMapping("/reembolso")
-    public class ReembolsoController {
+    @Autowired
+    private ReembolsoRepository reembolsoRepository;
 
-        @Autowired
-        private ReembolsoRepository reembolsoRepository;
+    @PostMapping
+    public ResponseEntity<String> createReembolso(@RequestBody Reembolso reembolsoRequest) {
+        Reembolso reembolso = new Reembolso();
+        reembolso.setDescricao(reembolsoRequest.getDescricao());
+        reembolso.setData(reembolsoRequest.getData());
+        reembolso.setValor(reembolsoRequest.getValor());
+        reembolso.setStatus("PENDENTE");
 
-        @PostMapping
-        public ResponseEntity<String> createReembolso(@RequestParam String descricao, @RequestParam String data, @RequestParam Double valor) {
-            Reembolso reembolso = new Reembolso();
-            // id will be auto-generated if you're using an auto-increment column in the database
-            reembolso.setDescricao(descricao);
-            reembolso.setData(data);  // Assuming data is in 'yyyy-MM-dd' format
-            reembolso.setValor(valor);
-            reembolso.setStatus("PENDENTE");
-
-            reembolsoRepository.save(reembolso);
-            return ResponseEntity.ok("Reembolso saved successfully!");
-        }
+        reembolsoRepository.save(reembolso);
+        return ResponseEntity.ok("Reembolso saved successfully!");
     }
 }
+
 

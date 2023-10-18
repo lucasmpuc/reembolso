@@ -2,5 +2,6 @@ CREATE TABLE reembolso (
     id INT AUTO_INCREMENT PRIMARY KEY,
     descricao VARCHAR(250) NOT NULL,
     valor DOUBLE NOT NULL,
+    data VARCHAR(50) NOT NULL,
     status VARCHAR(50) NOT NULL
 );
