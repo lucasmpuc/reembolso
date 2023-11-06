@@ -4,14 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gerenciamento de Reembolsos</title>
-    <style>
-        button { margin: 10px; }
-        .hidden { display: none; }
-        .input-field { margin-bottom: 20px; display: block; }
-        #descricao { width: 400px; }
-    </style>
+    <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
+
 
 <!-- Primeira tela: Seleção de Usuário -->
 <div id="selecaoUsuario">
@@ -21,7 +17,7 @@
 
 <!-- Segunda tela: Funcionário -->
 <div id="telaFuncionario" class="hidden">
-    <button onclick="voltarParaInicio()">Voltar</button>
+    <button onclick="mostrarTela('inicio')">Voltar</button>
     <h2>Funcionário</h2>
     <form action="/reembolso" method="post" onsubmit="enviarReembolso(); return false;">
         <label class="input-field">Descrição:<br><textarea name="descricao" id="descricao" rows="4"></textarea></label>
@@ -34,61 +30,14 @@
 
 <!-- Terceira tela: Gerente -->
 <div id="telaGerente" class="hidden">
-    <button onclick="voltarParaInicio()">Voltar</button>
+    <button onclick="mostrarTela('inicio')">Voltar</button>
     <h2>Gerente</h2>
 
     <div id="listaReembolsos">
         <!-- A lista de reembolsos será preenchida aqui -->
     </div>
 </div>
-
-<script>
-    function mostrarTela(tela) {
-        document.getElementById('selecaoUsuario').style.display = 'none';
-        document.getElementById('telaFuncionario').style.display = 'none';
-        document.getElementById('telaGerente').style.display = 'none';
-
-        if (tela === 'funcionario') {
-            document.getElementById('telaFuncionario').style.display = 'block';
-        } else if (tela === 'gerente') {
-            document.getElementById('telaGerente').style.display = 'block';
-            // Aqui você pode adicionar uma chamada AJAX para preencher a lista de reembolsos
-        }
-    }
-
-   function enviarReembolso() {
-    const descricao = document.getElementById('descricao').value;
-    const data = document.getElementById('data').value;
-    const valor = document.getElementById('valor').value;
-
-    // Create a JavaScript object with the form data
-    const formData = {
-        descricao: descricao,
-        data: data,
-        valor: valor
-    };
-
-    // Make an HTTP POST request to your server to save the data as JSON
-    fetch('/reembolso', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(formData)
-    })
-    .then(response => {
-        if (response.status === 200) {
-            alert('Reembolso saved successfully!');
-        } else {
-            alert('Error saving reembolso.');
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-    });
-}
-
-</script>
+<script src="/script.js"></script>
 
 </body>
 </html>

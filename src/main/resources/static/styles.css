@@ -1,0 +1,9 @@
+body { font-family: Arial, sans-serif; }
+.hidden { display: none; }
+.input-field { margin-bottom: 20px; display: block; }
+#descricao { width: 400px; }
+#telaFuncionario, #telaGerente { padding: 20px; border: 1px solid #ccc; border-radius: 5px; }
+@media (max-width: 600px) {
+    #descricao { width: 100%; }
+    .input-field, button { width: 100%; box-sizing: border-box; }
+}
